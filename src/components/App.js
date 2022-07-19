@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 // model.id = nanoid();
 
 export class App extends Component {
@@ -7,14 +7,41 @@ export class App extends Component {
     contacts: [],
     name: '',
   };
+  addContacts = name => {
+    const contact = {
+      // id: nanoid(),
+      name,
+    };
+    this.setState(({ contacts }) => ({
+      contacts: [contact, ...contacts],
+    }));
+  };
+  handleChange = e => {
+    console.log(e.currentTarget.value);
+    this.setState({ name: e.currentTarget.value });
+  };
+
+  handleSubmit = e => {
+    const { name } = this.state;
+    console.log('Name: ' + name);
+    e.preventDefault();
+    this.addContacts(name);
+    console.log(this.state);
+    this.setState({
+      contacts: [],
+      name: '',
+    });
+  };
 
   render() {
     return (
       <div>
-        <form>
+        <h2>Phonebook</h2>
+        <form name="Phonebook" onSubmit={this.handleSubmit}>
           <label>
             Name
             <input
+              onChange={this.handleChange}
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -22,8 +49,14 @@ export class App extends Component {
               required
             />
           </label>
-          <button type='submit'  className="">Add contact</button>
+          <button type="submit" className="">
+            Add contact
+          </button>
         </form>
+        <h2>Contacts</h2>
+        <ul className="Contacts__list">
+          <li className="Contacts__item">Rosie Simpson</li>
+        </ul>
       </div>
     );
   }
