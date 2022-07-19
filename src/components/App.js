@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
-// model.id = nanoid();
+import shortid from 'shortid';
+
 
 export class App extends Component {
   state = {
@@ -8,8 +8,9 @@ export class App extends Component {
     name: '',
   };
   addContacts = name => {
+    if (!name) { console.log("were is the name?") }
     const contact = {
-      id: nanoid(),
+      id: shortid.generate(),
       name,
     };
     this.setState(({ contacts }) => ({
@@ -19,6 +20,7 @@ export class App extends Component {
   handleChange = e => {
     console.log(e.currentTarget.value);
     this.setState({ name: e.currentTarget.value });
+    console.log(this.state);
   };
 
   handleSubmit = e => {
@@ -27,10 +29,13 @@ export class App extends Component {
     e.preventDefault();
     this.addContacts(name);
     console.log(this.state);
-    this.setState({
-            name: '',
-    });
+    this.reset();
+    
   };
+
+  reset = () => {
+    this.setState({name:''})
+  }
 
   render() {
     return (
