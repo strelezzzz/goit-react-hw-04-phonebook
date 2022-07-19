@@ -9,7 +9,7 @@ export class App extends Component {
   };
   addContacts = name => {
     const contact = {
-      // id: nanoid(),
+      id: nanoid(),
       name,
     };
     this.setState(({ contacts }) => ({
@@ -28,8 +28,7 @@ export class App extends Component {
     this.addContacts(name);
     console.log(this.state);
     this.setState({
-      contacts: [],
-      name: '',
+            name: '',
     });
   };
 
