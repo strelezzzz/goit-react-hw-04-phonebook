@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import shortid from 'shortid';
 
 import Contacts from './Contacts';
+import Filter from './Filter';
 
 export class App extends Component {
   state = {
     contacts: [
-      { id: '_xIHxcBWY', name: 'Misis Y', number: '44-22' },
-      { id: '9iYuhyfxo', name: 'Mister X', number: '44-11' },
-      { id: 'YFjpf2c8o', name: 'Rosie Simpson', number: '44-00' },
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
+    filter: '',
     name: '',
     number: '',
   };
@@ -29,7 +32,7 @@ export class App extends Component {
   handleChange = e => {
     // console.log('event: ', e.currentTarget.value);
     this.setState({ [e.target.name]: e.target.value });
-    console.log('event: ', e.target.name);
+    console.log('event: ', e.target.name, 'VALUE:', e.target.value);
   };
 
   reset = () => {
@@ -44,7 +47,7 @@ export class App extends Component {
   };
 
   render() {
-    const { name, number, contacts } = this.state;
+    const { filter, name, number, contacts } = this.state;
 
     return (
       <div>
@@ -80,6 +83,7 @@ export class App extends Component {
         </form>
 
         <Contacts contacts={contacts} />
+        <Filter onChange={this.handleChange} value={filter} />
       </div>
     );
   }
