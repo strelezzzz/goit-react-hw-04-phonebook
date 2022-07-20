@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 
+import Contacts from './Contacts';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: '_xIHxcBWY', name: 'Misis Y' },
+      { id: '9iYuhyfxo', name: 'Mister X' },
+      { id: 'YFjpf2c8o', name: 'Rosie Simpson' },
+    ],
     name: '',
   };
   addContacts = name => {
-    if (!name) { console.log("were is the name?") }
+    if (!name) {
+      console.log('addContacts name?');
+    }
     const contact = {
       id: shortid.generate(),
       name,
@@ -18,26 +25,27 @@ export class App extends Component {
     }));
   };
   handleChange = e => {
-    console.log(e.currentTarget.value);
-    this.setState({ name: e.currentTarget.value });
-    console.log(this.state);
-  };
-
-  handleSubmit = e => {
-    const { name } = this.state;
-    console.log('Name: ' + name);
-    e.preventDefault();
-    this.addContacts(name);
-    console.log(this.state);
-    this.reset();
-    
+    console.log('event: ', e.currentTarget.value);
+    this.setState({ [e.target.name]: e.currentTarget.value });
+    console.log('event: ', e.target);
   };
 
   reset = () => {
-    this.setState({name:''})
-  }
+    this.setState({ name: '' });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { name } = this.state;
+
+    this.addContacts(name);
+
+    this.reset();
+  };
 
   render() {
+    const { name, contacts } = this.state;
+
     return (
       <div>
         <h2>Phonebook</h2>
@@ -46,6 +54,7 @@ export class App extends Component {
             Name
             <input
               onChange={this.handleChange}
+              value={name}
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -57,10 +66,8 @@ export class App extends Component {
             Add contact
           </button>
         </form>
-        <h2>Contacts</h2>
-        <ul className="Contacts__list">
-          <li className="Contacts__item">Rosie Simpson</li>
-        </ul>
+
+        <Contacts contacts={contacts} />
       </div>
     );
   }
