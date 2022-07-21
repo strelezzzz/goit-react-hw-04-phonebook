@@ -32,7 +32,14 @@ export class App extends Component {
       contacts: [contact, ...contacts],
     }));
   };
-
+  //delete contact
+  deleteContact = itemId => {
+    this.setState(prevState => ({
+      contacts: [
+        ...prevState.contacts.filter(contact => contact.id !== itemId),
+      ],
+    }));
+  };
   //відслідковує зміну value(відповідного елемента за  name="?" ) , та записує в стейт;
   handleChange = e => {
     // console.log('event: ', e.currentTarget.value);
@@ -41,9 +48,9 @@ export class App extends Component {
   //повертає новий масив obj - контактів, які проходять фільтр
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
-    const normalizedFilter = filter.toLocaleLowerCase();
+    const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact =>
-      contact.name.toLocaleLowerCase().includes(normalizedFilter)
+      contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
   //перевіряє чи є такий контакт у списку
@@ -64,7 +71,10 @@ export class App extends Component {
         <ContactForm onSubmit={this.addContacts} />
         <h2>Contacts</h2>
         <Filter onChange={this.handleChange} value={filter} />
-        <ContactList contacts={visibleContacts} />
+        <ContactList
+          contacts={visibleContacts}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }
