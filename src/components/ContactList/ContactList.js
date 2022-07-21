@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Contacts = ({ contacts }, { children }) => {
+const ContactList = ({ contacts }) => {
   return (
     <>
       <ul>
@@ -14,4 +14,4 @@ const Contacts = ({ contacts }, { children }) => {
   );
 };
 
-export default Contacts;
+export default ContactList;

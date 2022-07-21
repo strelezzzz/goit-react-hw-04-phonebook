@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 
-import Contacts from './Contacts';
+import ContactList from './ContactList';
 import Filter from './Filter';
+import ContactForm from './ContactForm';
 
 export class App extends Component {
   state = {
@@ -62,39 +63,16 @@ export class App extends Component {
     console.log(visibleContacts);
     return (
       <div>
-        <h2>Phonebook</h2>
-        <form name="Phonebook" onSubmit={this.handleSubmit}>
-          <label>
-            Name
-            <input
-              onChange={this.handleChange}
-              value={name}
-              type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
-          </label>
-          <label>
-            Number
-            <input
-              onChange={this.handleChange}
-              value={number}
-              type="tel"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
-          </label>
-          <button type="submit" className="">
-            Add contact
-          </button>
-        </form>
+        <h1>Phonebook</h1>
+        <ContactForm
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+          name={name}
+          number={number}
+        />
         <h2>Contacts</h2>
         <Filter onChange={this.handleChange} value={filter} />
-        <Contacts contacts={visibleContacts}></Contacts>
+        <ContactList contacts={visibleContacts} />
       </div>
     );
   }
