@@ -1,7 +1,9 @@
 import React from 'react';
 
-const ContactElement = () => {
-  <label>Name</label>;
-};
+const ContactElement = ({ name, number }) => (
+  <>
+    {name}: {number}
+  </>
+);
 
 export default ContactElement;
