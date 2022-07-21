@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ContactElement = ({ name, number, onDeleteContact, id }) => (
   <>
@@ -8,5 +9,12 @@ const ContactElement = ({ name, number, onDeleteContact, id }) => (
     </button>
   </>
 );
+
+ContactElement.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+};
 
 export default ContactElement;
