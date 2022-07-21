@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Contacts = ({ contacts }) => {
+const Contacts = ({ contacts }, { children }) => {
   return (
     <>
-      <h2>Contacts</h2>
       <ul>
         {contacts.map(({ id, name, number }) => (
           <li key={id}>
