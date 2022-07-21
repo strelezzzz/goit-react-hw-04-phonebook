@@ -17,14 +17,17 @@ export class App extends Component {
   };
   //додає контакт у стейт
   addContacts = (name, number) => {
-    if (!name) {
-      console.log('addContacts name?');
+    //перевірка чи є ім'я у списку(метод Find повертає undefined, якщо не виконується умова)
+    if (this.chekContact(name)) {
+      return alert(`${name} is already in contacts.`);
     }
+    //створюємо контакт
     const contact = {
       id: shortid.generate(),
       name,
       number,
     };
+    //записуємо контакт у масив
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
@@ -41,6 +44,13 @@ export class App extends Component {
     const normalizedFilter = filter.toLocaleLowerCase();
     return contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(normalizedFilter)
+    );
+  };
+  //перевіряє чи є такий контакт у списку
+  chekContact = name => {
+    const { contacts } = this.state;
+    return contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
   };
 
