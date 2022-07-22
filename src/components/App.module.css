@@ -1,0 +1,15 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #010101;
+}
+
+.title {
+  padding: 0 10px;
+  margin-bottom: 20px;
+  background-color: rgb(240, 240, 240);
+}

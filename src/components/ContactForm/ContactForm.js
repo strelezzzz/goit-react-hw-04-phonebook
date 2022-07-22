@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import css from './ContactForm.module.css';
 
 class ContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
+
   //скидає значення форми до початкового значення;
   reset = () => {
     this.setState({ name: '', number: '' });
   };
+
   //сабміт форми та передача пропів;
   handleSubmit = e => {
     e.preventDefault();
@@ -28,10 +33,15 @@ class ContactForm extends Component {
     const { name, number } = this.state;
 
     return (
-      <form name="ContactForm" onSubmit={this.handleSubmit}>
-        <label>
+      <form
+        className={css.form}
+        name="ContactForm"
+        onSubmit={this.handleSubmit}
+      >
+        <label className={css.form__label}>
           Name
           <input
+            className={css.form__input}
             onChange={this.handleChange}
             value={name}
             type="text"
@@ -41,9 +51,10 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <label>
+        <label className={css.form__label}>
           Number
           <input
+            className={css.form__input}
             onChange={this.handleChange}
             value={number}
             type="tel"
@@ -53,7 +64,7 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <button type="submit" className="">
+        <button className={css.formButton} type="submit">
           Add contact
         </button>
       </form>
@@ -61,5 +72,9 @@ class ContactForm extends Component {
   }
 }
 // ({ onSubmit, onChange, name, number }) =>
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default ContactForm;

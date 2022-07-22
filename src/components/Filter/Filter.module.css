@@ -1,0 +1,10 @@
+.filter__label {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter__input {
+  margin: 10px 0;
+  border: 2px solid rgb(53, 53, 53);
+  border-radius: 2px;
+}
