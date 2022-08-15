@@ -2,19 +2,21 @@ import { useState } from 'react';
 
 import css from './ContactForm.module.css';
 //
-
 const ContactForm = ({ onSubmit }) => {
+  //
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   //
   const handleChange = event => {
-    switch (event.target.name) {
+    const { name, value } = event.target;
+
+    switch (name) {
       case 'name':
-        setName(event.target.value);
+        setName(value);
         break;
 
       case 'number':
-        setNumber(event.target.value);
+        setNumber(value);
         break;
 
       default:
@@ -29,6 +31,7 @@ const ContactForm = ({ onSubmit }) => {
     setName('');
     setNumber('');
   };
+  //
   return (
     <form className={css.form} name="ContactForm" onSubmit={handleSubmit}>
       <label className={css.form__label}>
