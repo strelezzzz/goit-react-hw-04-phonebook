@@ -17,6 +17,26 @@ export const App = () => {
   const [contacts, setContacts] = useState(defaultContacts);
   const [filter, setFilter] = useState('');
 
+  // записуємо в стейт контакти, при умові якщо вони є в локалСторейдж
+  useEffect(() => {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    // console.log(contacts);
+    if (parsedContacts) {
+      setContacts({ parsedContacts });
+    }
+  }, []);
+
+  // записуємо в локалСторейдж контакти , при умові що масив контактів змінився
+  // useEffect(() => {
+  //   // console.log('prevState:', prevState.contacts);
+  //   // console.log('this.state', this.state.contacts);
+  //   if (contacts !== prevState.contacts) {
+  //     // console.log('оновились контакти');
+  //     localStorage.setItem('contacts', JSON.stringify(contacts));
+  //   }
+  // }, [contacts]);
+
   //перевіряє чи є такий контакт у списку
   const chekContact = name => {
     return contacts.find(
