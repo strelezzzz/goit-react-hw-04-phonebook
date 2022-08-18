@@ -14,28 +14,19 @@ export const App = () => {
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ];
 
-  const [contacts, setContacts] = useState(defaultContacts);
+  const [contacts, setContacts] = useState(() => {
+    return (
+      JSON.parse(window.localStorage.getItem('contacts')) ?? defaultContacts
+    );
+  });
   const [filter, setFilter] = useState('');
 
   // записуємо в стейт контакти, при умові якщо вони є в локалСторейдж
-  useEffect(() => {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-    // console.log(contacts);
-    if (parsedContacts) {
-      setContacts({ parsedContacts });
-    }
-  }, []);
 
   // записуємо в локалСторейдж контакти , при умові що масив контактів змінився
-  // useEffect(() => {
-  //   // console.log('prevState:', prevState.contacts);
-  //   // console.log('this.state', this.state.contacts);
-  //   if (contacts !== prevState.contacts) {
-  //     // console.log('оновились контакти');
-  //     localStorage.setItem('contacts', JSON.stringify(contacts));
-  //   }
-  // }, [contacts]);
+  useEffect(() => {
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   //перевіряє чи є такий контакт у списку
   const chekContact = name => {
